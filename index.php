@@ -3,14 +3,41 @@
 
 function getPokemonData()
 {
-    // 1) genera número aleatorio
-    // 2) lee el contenido de la api 
+    // 1) El número aleatorio
+    $Numaleatorio=rand(1,151);
+    
+
+    // 2) Se lee el contenido de la api 
+    
+    $url = "https://pokeapi.co/api/v2/pokemon/$Numaleatorio"; 
+    $json = file_get_contents($url);
+
     // 3) lo decodifica
+    $pokemonData = json_decode($json, true);   
     // 4) Creo un objeto pokemon (me quedo sólo con los datos que necesito):
     // nombre (name)
     // imagen (sprites[front_default])
     // tipos (types[]-> dentro de cada elemento [type][name])
-    return "pokemon";
+    $tipos = [];
+    foreach ($pokemonData['types'] as $key => $value) {
+        array_push($tipos, $value['type']['name']);
+    }
+
+    $imagen = $pokemonData['sprites']['front_default'];
+
+    $habilidades = [];
+    foreach ($pokemonData['abilities'] as $ability) {
+        array_push($habilidades, $ability['ability']['name']);
+    }
+
+    $pokemon = [
+    "nombre" => $pokemonData['name'],
+    "imagen" => $imagen,
+    "tipos" => $tipos,
+    "habilidades" => $habilidades
+    ];
+
+    return $pokemon;
 }
 
 $pokemon = getPokemonData();
@@ -18,7 +45,44 @@ $pokemon = getPokemonData();
 
 function renderCards($pokeArray)
 {
-    // recibe datos y genera el html
+
+    echo '
+    <div class="carta">
+        <div class="img-container">
+            <img src="' . $pokeArray['imagen'] . '" alt="' . $pokeArray['nombre'] . '">
+        </div>
+        <div class="datos">
+            <h3>' . $pokeArray['nombre'] . '</h3>
+    
+    <div class="tipos-pokemon">';
+            
+    // Aqui muestra los tipos de pokemon
+    foreach ($pokeArray['tipos'] as $tipo) {
+        echo '<span>' . $tipo . '</span>';
+    }
+    
+    echo '</div>
+            <ul class="habilidades">';
+    
+    // Aquí las habilidades
+    foreach ($pokeArray['habilidades'] as $habilidad) {
+        echo '<li>' . $habilidad . '</li>';
+    }
+
+    echo '</ul>
+        </div>
+        </div>';
+}
+
+//La función con el for para que salgan 4 Pokemon en lugar de 1.
+
+function RepeticionPokemon()
+{
+    for ($i = 0; $i < 4; $i++) {
+    $pokemon = getPokemonData();
+    renderCards($pokemon);
+    }
+
 }
 
 ?>
@@ -32,30 +96,11 @@ function renderCards($pokeArray)
     <title>PokeWeb</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <h1>PokeCartas</h1>
 
-    <section id="pokecartas">
-        <div class="carta">
-            <div class="img-container">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="pikachu">
-            </div>
-            <div class="datos">
-                <h3>Pikachu</h3>
-                <div class="tipos-pokemon">
-                    <span>eléctrico</span>
-                    <span>otro más</span>
-                </div>
-                <ul class="habilidades">
-                    <li>impactrueno</li>
-                    <li>chispitas</li>
-                </ul>
-            </div>
-        </div>
-
-    </section>
-    <?php renderCards($pokemon) ?>
+    <?php RepeticionPokemon()
+    ?>
 </body>
 
 </html>
