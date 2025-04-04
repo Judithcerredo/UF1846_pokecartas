@@ -18,6 +18,7 @@ function getPokemonData()
     // nombre (name)
     // imagen (sprites[front_default])
     // tipos (types[]-> dentro de cada elemento [type][name])
+    
     $tipos = [];
     foreach ($pokemonData['types'] as $key => $value) {
         array_push($tipos, $value['type']['name']);
@@ -46,8 +47,9 @@ $pokemon = getPokemonData();
 function renderCards($pokeArray)
 {
 
-    echo '
-    <div class="carta">
+    echo
+    
+    '<div class="carta">
         <div class="img-container">
             <img src="' . $pokeArray['imagen'] . '" alt="' . $pokeArray['nombre'] . '">
         </div>
@@ -62,7 +64,8 @@ function renderCards($pokeArray)
     }
     
     echo '</div>
-            <ul class="habilidades">';
+            
+    <ul class="habilidades">';
     
     // Aquí las habilidades
     foreach ($pokeArray['habilidades'] as $habilidad) {
@@ -78,13 +81,13 @@ function renderCards($pokeArray)
 
 function RepeticionPokemon()
 {
+    echo '<div class="baraja">';
     for ($i = 0; $i < 4; $i++) {
-    $pokemon = getPokemonData();
-    renderCards($pokemon);
+        $pokemon = getPokemonData();
+        renderCards($pokemon);
     }
-
+    echo '</div>';
 }
-
 ?>
 
 <!DOCTYPE html>

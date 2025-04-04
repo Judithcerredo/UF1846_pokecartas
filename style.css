@@ -1,21 +1,61 @@
 * {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-shadow: 3px 3px 8px rgba(255, 221, 51, 0.8);
+    font-size: 60px;
+    color: #222;
+}
+
+.habilidades {
+    text-align: center;
+    padding: 0;
+}
+
+.habilidades li {
+    font-size: 14px;
+    color: #000000;
+    list-style: none;
+    margin: 4px 0;
 }
 
 .carta {
-    max-width: 200px;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-    
-
+    max-width: 280px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ffffff, #e3f2fd);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 
 }
 
-.electrico{
-    background-color: yellow;
+/* Efecto del Ratón */
+.carta:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); 
+}
+
+.baraja {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
 }
 
 .img-container {
@@ -23,8 +63,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 15px;
 
-    background-color: #73d3ff;
+    background-color: #a0ddfa;
     border-radius: 12px;
     border: 1px solid #e5e5e5;
 
@@ -33,12 +74,20 @@
 .tipos-pokemon {
     display: flex;
     gap: 8px;
+    font-size: 14px;
+}
 
-    span {
-        background-color: #aaa;
-        border-radius: 24px;
-        font-size: 12px;
-        font-weight: 500;
-        padding: 4px 8px;
-    }
+span {
+    background-color: #aaa;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 10px;
+}
+
+.datos{
+    font-size: 22px;
+    text-transform: capitalize;
+    margin: 15px 0;
+    color: #333;
 }
